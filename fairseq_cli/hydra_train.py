@@ -18,6 +18,7 @@ from hydra.core.hydra_config import HydraConfig
 import torch
 from omegaconf import OmegaConf, open_dict
 
+torch.autograd.set_detect_anomaly(True)
 
 logger = logging.getLogger("fairseq_cli.hydra_train")
 
