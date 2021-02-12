@@ -25,6 +25,7 @@ from fairseq.logging import meters, metrics
 from fairseq.nan_detector import NanDetector
 from fairseq.optim import lr_scheduler
 
+torch.autograd.set_detect_anomaly(True)
 
 logger = logging.getLogger(__name__)
 
