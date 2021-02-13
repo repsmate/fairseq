@@ -7,6 +7,7 @@
 Train a new model on one or across multiple GPUs.
 """
 
+import trace
 import argparse
 import logging
 import math
@@ -139,8 +140,22 @@ def main(cfg: FairseqConfig) -> None:
             )
             break
 
+        # create a Trace object, telling it what to ignore, and whether to
+        # do tracing or line-counting or both.
+        tracer = trace.Trace(
+            ignoredirs=[sys.prefix, sys.exec_prefix],
+            trace=1,
+            count=1,
+            countfuncs=1,
+            countcallers=1)
+
         # train for one epoch
-        valid_losses, should_stop = train(cfg, trainer, task, epoch_itr)
+        valid_losses, should_stop = tracer.run('train(cfg, trainer, task, epoch_itr)')
+
+        # make a report, placing output in the current directory
+        r = tracer.results()
+        r.write_results(show_missing=True, coverdir="tracer")
+
         if should_stop:
             break
 
