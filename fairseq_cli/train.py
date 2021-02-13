@@ -254,7 +254,7 @@ def train(
     logger.info("Start iterating over samples")
     logger.info("OKKKKK")
     for i, samples in enumerate(progress):
-        logger.info("inside for loop - before train_step - i: {}").format(i)
+        logger.info("inside for loop - before train_step - i: {}".format(i))
         with metrics.aggregate("train_inner"), torch.autograd.profiler.record_function(
             "train_step-%d" % i
         ):
@@ -276,7 +276,7 @@ def train(
             cfg, trainer, task, epoch_itr, valid_subsets, end_of_epoch
         )
 
-        logger.info("inside for loop - after train_step - i: {}").format(i)
+        logger.info("inside for loop - after train_step - i: {}".format(i))
 
         if should_stop:
             break
