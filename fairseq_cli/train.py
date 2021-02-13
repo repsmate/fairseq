@@ -150,7 +150,7 @@ def main(cfg: FairseqConfig) -> None:
             countcallers=1)
 
         # train for one epoch
-        valid_losses, should_stop = tracer.run('train(cfg, trainer, task, epoch_itr)')
+        valid_losses, should_stop = tracer.runfunc(train, cfg, trainer, task, epoch_itr)
 
         # make a report, placing output in the current directory
         r = tracer.results()
