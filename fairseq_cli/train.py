@@ -259,6 +259,8 @@ def train(
             cfg, trainer, task, epoch_itr, valid_subsets, end_of_epoch
         )
 
+        logger.info("inside for loop i: {}").format(i)
+
         if should_stop:
             break
 
